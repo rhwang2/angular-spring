@@ -1,0 +1,56 @@
+<!doctype html>
+<html ng-app="pptApp">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Rene Hwang">
+    <meta name="generator" content="angular-spring">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" href="style/uspto.min.css">
+    <link rel="stylesheet" href="style/app.css">
+
+    <title>angular-spring-demo</title>
+  </head>
+  <body>
+    <div id="siteWrapper" ng-controller="PPTcontroller as app">
+      <div ng-include="'header.html'"></div>
+      <section data-ng-init="init()">
+        <div class="container">
+          
+          <div style="width: 250px;" class="pull-left">
+            <ul class="nav nav-stacked nav-tree" role="tab-list">
+              <li role="presentation" class="category">Filters</li>
+                Projects
+                <div ng-repeat="project in projects">
+                  <input type="checkbox" id="projectFilter" value="{{project.key}}">{{project.value}}</input>
+                </div>
+            </ul>
+          </div>
+          <div class="keyline-left" style="margin-left: 250px;">
+            <div class="padding-4">
+              <div class="prose">
+                <h1 class="margin-top-0">PPT Search Demo</h1>
+              </div>
+              <div>
+                Projects: 
+                <select ng-model="formData.projectID">
+                  <option value="">---</option>
+                  <option ng-repeat="project in projects" value="{{project.key}}">{{project.value}}</option>
+                </select>
+                {{formData.projectID}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+    
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/components/ppt/controllers/PPTcontroller.js"></script>
+    
+  </body>
+</html>
