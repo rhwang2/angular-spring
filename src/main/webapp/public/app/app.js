@@ -1,6 +1,7 @@
 var pptApp = angular.module('pptApp', [
   'ngRoute',
-  'pptControllers'
+  'pptControllers',
+  'angularGrid'
 ]);
 
 pptApp.config(['$routeProvider',

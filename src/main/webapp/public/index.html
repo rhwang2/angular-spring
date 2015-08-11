@@ -8,6 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <link rel="stylesheet" href="style/uspto.min.css">
+    <link rel="stylesheet" href="style/angular-grid/angular-grid.css">
+    <link rel="stylesheet" href="style/angular-grid/theme-fresh.css">
     <link rel="stylesheet" href="style/app.css">
 
     <title>angular-spring-demo</title>
@@ -17,21 +19,29 @@
       <div ng-include="'header.html'"></div>
       <section data-ng-init="init()">
         <div class="container">
-          
           <div style="width: 250px;" class="pull-left">
-            <ul class="nav nav-stacked nav-tree" role="tab-list">
-              <li role="presentation" class="category">Filters</li>
-                Projects
-                <div ng-repeat="project in projects">
-                  <input type="checkbox" id="projectFilter" value="{{project.key}}">{{project.value}}</input>
+            <div id="menu" ng-init="showProjects=true">
+              <div>
+                <label class="nav nav-stacked">
+                  <a href="" class="icon icon-plus-square-o" ng-show="!showProjects" ng-click="showProjects=!showProjects"></a>
+                  <a href="" class="icon icon-minus-square-o" ng-show="showProjects" ng-click="showProjects=!showProjects"></a>
+                  <a href="" ng-click="showProjects=!showProjects" class="category">Project Names</a>
+                </label>
+              </div>
+              <div ng-show="showProjects">
+                <div ng-repeat="project in projects" class="nav nav-stacked">
+                  <label><input type="checkbox" id="projectFilter" value="{{project.key}}" ng-click="applyFilter()"> {{project.value}}</input></label>
                 </div>
-            </ul>
+              </div>
+            </div>
           </div>
           <div class="keyline-left" style="margin-left: 250px;">
             <div class="padding-4">
               <div class="prose">
                 <h1 class="margin-top-0">PPT Search Demo</h1>
+                <input type="text" size="100">
               </div>
+              
               <div>
                 Projects: 
                 <select ng-model="formData.projectID">
@@ -40,15 +50,21 @@
                 </select>
                 {{formData.projectID}}
               </div>
+              
+              <div ag-grid="gridOptions" class="ag-fresh" style="height 100%"></div>
             </div>
           </div>
         </div>
-
+<button ng-click="applyFilter()">click</button>
       </section>
     </div>
     
+    
+    
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-route/angular-route.js"></script>
+    <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src="lib/angular-grid.js"></script>
     <script src="app/app.js"></script>
     <script src="app/components/ppt/controllers/PPTcontroller.js"></script>
     
